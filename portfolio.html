@@ -140,17 +140,20 @@
         }
 
        /* Hexagon Grid Styling */
-        .profile-image::before {
-            content: '';
-            position: absolute;
-            top: -30px; /* Adjust position as needed */
-            left: -30px; /* Adjust position as needed */
-            width: 240px; /* Size of the grid area */
-            height: 240px; /* Size of the grid area */
-            background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2L2 8V16L12 22L22 16V8L12 2Z' stroke='%23a899ff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") repeat; /* Hexagon icon and color */
-            opacity: 0.2; /* Adjust transparency */
-            z-index: -1; /* Place behind the profile image */
-        }
+       .profile-image::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 220px;
+    height: 220px;
+    background-color: rgba(168, 153, 255, 0.2);
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 1;
+    filter: blur(5px); /* Optional: Add blur for glow effect */
+}
 
         .profile-image:hover {
             transform: scale(1.1);
