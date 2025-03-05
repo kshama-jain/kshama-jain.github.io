@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>Kshama Jain - Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         /* General Styles */
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            /* New purple techy background */
-            background: linear-gradient(to bottom, #2b273f, #3f3556);
+            /* Apply the background gradient to the entire body */
+            background: linear-gradient(to bottom, #372765, #4a3b75);
             color: #ddd;
             line-height: 1.6;
             overflow-x: hidden;
@@ -54,6 +55,12 @@
             font-size: 1.7rem;
             font-weight: 600;
             color: #fff;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: #c6b7ff;
         }
 
         nav ul {
@@ -79,7 +86,6 @@
 
         /* Intro Section */
         .intro-section {
-            background-color: #21222c;
             padding: 6rem 2rem;
             text-align: center;
             position: relative;
@@ -88,51 +94,73 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            /* Remove background from intro-section, as it's already in body */
+            padding-top: 8rem; /* Added to push content down below the header */
         }
 
-        .intro-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
+        #particles-js {
+            position: fixed; /* Change to fixed */
             width: 100%;
             height: 100%;
-            background: url('background.jpg') center/cover no-repeat fixed;
-            z-index: 0;
-        }
-
-        .intro-section::after {
-            content: '';
-            position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(33, 34, 44, 0.3), rgba(33, 34, 44, 0.7));
-            z-index: 1;
+            z-index: -1; /* Keep it behind content */
+            pointer-events: none; /* Make sure it doesn't interfere with clicks */
         }
 
         .intro-content {
             max-width: 800px;
             margin: 0 auto;
-            position: relative;
-            z-index: 2;
+            position: relative; /* Ensure content is above particles */
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 1s ease-out; /* Optional fade-in animation */
         }
 
-        .profile-image {
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+
+       .profile-image {
             width: 180px;
-            height: 180px;
-            border-radius: 50%;
+            height: 180px;  /* Height should match width for a regular octagon */
+            /* border-radius: 50%; */
+            clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
             overflow: hidden;
             margin: 0 auto 20px;
-            border: 4px solid #a899ff;
+            border: 4px solid #c6bff3;  /* Border property for the image */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+            position: relative; /* Required for absolute positioning of grids */
+            margin-bottom: 30px; /* Added margin to move it down */
+        }
+
+       /* Hexagon Grid Styling */
+        .profile-image::before {
+            content: '';
+            position: absolute;
+            top: -30px; /* Adjust position as needed */
+            left: -30px; /* Adjust position as needed */
+            width: 240px; /* Size of the grid area */
+            height: 240px; /* Size of the grid area */
+            background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2L2 8V16L12 22L22 16V8L12 2Z' stroke='%23a899ff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") repeat; /* Hexagon icon and color */
+            opacity: 0.2; /* Adjust transparency */
+            z-index: -1; /* Place behind the profile image */
+        }
+
+        .profile-image:hover {
+            transform: scale(1.1);
         }
 
         .profile-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
         }
 
         .intro-section h1 {
@@ -140,34 +168,31 @@
             margin-bottom: 1rem;
             color: #fff;
             font-weight: 700;
-            display: flex; /* Use Flexbox */
-            align-items: center; /* Vertical alignment */
-            justify-content: center; /* Horizontal alignment */
-        }
-
-        #animated-name {
-            display: inline-block;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-
-        #animated-name::after {
-            content: '|';
-            display: inline-block;
-            margin-left: 5px;
-            color: #fff;
-            animation: blink-caret .75s step-end infinite;
-        }
-
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: #fff; }
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-top: -1rem; /* Adjust this value to move "Hello" upward */
         }
 
         .intro-section p {
             font-size: 1.3rem;
             color: #ccc;
-            line-height: 1.8;
+            line-height: 1.4  ;
+            max-width: 750px;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            background-color: #a899ff;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #c6b7ff;
+            text-decoration: none;
         }
 
         /* Education Section */
@@ -177,6 +202,7 @@
             margin: 0 auto;
             position: relative;
             overflow: hidden;
+            margin-bottom: 0;
         }
 
         .education-section h2 {
@@ -187,18 +213,6 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
-        }
-
-        .education-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(168, 153, 255, 0.05), rgba(198, 183, 255, 0.05));
-            z-index: 0;
-            pointer-events: none;
         }
 
         .timeline {
@@ -223,6 +237,7 @@
             position: relative;
             padding-left: 2rem;
             z-index: 1;
+            animation: fadeInUp 0.5s ease-out;
         }
 
         .timeline-item::before {
@@ -277,10 +292,7 @@
             padding: 6rem 2rem;
             max-width: 1000px;
             margin: 0 auto;
-            background-color: #21222c;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            margin-bottom: 5rem;
+            margin-bottom: 0;
         }
 
         .experience-section h2 {
@@ -318,9 +330,8 @@
         }
 
         /* Skills Section */
-        .skills-section {
+         .skills-section {
             padding: 6rem 2rem;
-            background-color: #21222c;
             overflow: hidden;
         }
 
@@ -349,6 +360,7 @@
             text-align: center;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 0.6s ease-out;
         }
 
         .skill-item:hover {
@@ -376,8 +388,11 @@
         }
 
         /* Projects Section */
-        .projects-section {
+         .projects-section {
             padding: 6rem 2rem;
+             background: linear-gradient(to bottom, rgba(55, 39, 101, 0.8), rgba(74, 59, 117, 0.8));
+            position: relative;
+            z-index: 0;
         }
 
         .projects-section h2 {
@@ -465,15 +480,15 @@
         /* Contact Section */
         .contact-section {
             padding: 6rem 2rem;
-            background-color: #21222c;
+            background-color: #2b273f;
             text-align: center;
         }
 
         .contact-section h2 {
             font-size: 2.5rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
             color: #fff;
-            font-weight: 600;
+            font-weight: 200;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -537,14 +552,6 @@
                 justify-content: initial;
             }
 
-            .intro-section::before {
-                position: fixed;
-                background-size: cover;
-            }
-
-            .intro-section::after {
-                position: fixed;
-            }
 
             .intro-section h1 {
                 font-size: 2.5rem;
@@ -585,6 +592,37 @@
             .projects-grid {
                 grid-template-columns: 1fr;
             }
+            #animated-name {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        #animated-name::after {
+            content: '|';
+            display: inline-block;
+            margin-left: 5px;
+            color: #fff;
+            animation: blink-caret .75s step-end infinite;
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #fff; }
+        }
+        }
+
+        /* Fade-in Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            
         }
     </style>
 </head>
@@ -594,7 +632,7 @@
         <nav>
             <div class="logo">Portfolio</div>
             <ul>
-                <li><a href="#intro">Intro</a></li>
+                <li><a href="#intro">About me </a></li>
                 <li><a href="#education">Education</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#skills">Skills</a></li>
@@ -605,12 +643,13 @@
     </header>
 
     <section id="intro" class="intro-section">
+        <div id="particles-js"></div>
         <div class="intro-content">
             <div class="profile-image">
                 <img src="profile.jpg" alt="Kshama Jain">
             </div>
-            <h1>Hello, I'm  :<span id="animated-name"> Kshama Jain</span></h1>
-            <p>A passionate student with a background in computer science. I'm eager to learn and contribute to innovative projects. My goal is to create impactful and user-friendly solutions.</p>
+            <h1>Hello, I'm  <span id="animated-name"> Kshama Jain</span></h1>
+            <p> I’m a third-year B.Tech Computer Science student driven by curiosity and innovation. My passion lies in Machine Learning and Web Development, where I explore how AI can enhance real-world applications and make technology more intuitive. </p><a href="#projects" class="cta-button">View My Projects</a>
         </div>
     </section>
 
@@ -619,33 +658,35 @@
         <div class="timeline">
             <div class="timeline-item">
                 <div class="timeline-content">
-                    <h3>[Degree Name]</h3>
-                    <p>[University Name], [Graduation Year]</p>
-                    <p>Relevant coursework: [List coursework]</p>
+                    <h3>Bachelor of Technology in Computer Science</h3>
+                    <p>PES UNIVERSITY, Expected Graduation: 2026</p>
+                    <p>Relevant coursework: Data Structures and Algorithms, Database Management Systems, Software Engineering, Machine learning ,Generative AI</p>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-content">
-                    <h3>[Previous Degree/Certification]</h3>
-                    <p>[Institution Name], [Graduation Year]</p>
-                    <p>Relevant skills acquired: [List skills]</p>
+                    <h3>Pre-University Course (PUC)</h3>
+                    <p>Christ Junior College, Graduation Year: 2022</p>
+                    <p>Relevant skills acquired: Strong foundation in mathematics and science, C++.</p>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-content">
-                    <h3>[High School/Other Education]</h3>
-                    <p>[School Name], [Graduation Year]</p>
+                    <h3>Indian Certificate of Secondary Education (ICSE)</h3>
+                    <p>Baldwin Girls' High School, Graduation Year: 2020</p>
+                    <p>Relevant skills acquired: Strong foundation in mathematics and science.</p>
                 </div>
             </div>
+
         </div>
     </section>
 
    <section id="experience" class="experience-section">
         <h2>Experience</h2>
         <div class="experience-card">
-            <h3>[Job Title]</h3>
-            <p>[Company Name], [Start Date] - [End Date]</p>
-            <p>[Description of responsibilities and achievements]</p>
+            <h3>Full stack development - intern</h3>
+            <p>Velvetek Systems</p>
+            <p>Developed and maintained features for a web application using React and Node.js. Collaborated with a team of engineers to improve code quality and performance.  Contributed to the design and implementation of new user interfaces.</p>
         </div>
     </section>
 
@@ -655,36 +696,33 @@
             <div class="skill-item">
                 <i class="fas fa-code"></i>
                 <h3>Programming</h3>
-                <p>HTML, CSS, JavaScript, Python, Java</p>
+                <p>Python, Java, JavaScript, C++</p>
             </div>
             <div class="skill-item">
-                <i class="fas fa-paint-brush"></i>
-                <h3>Web development</h3>
-                <p>UI/UX Design, Figma, Adobe Photoshop, Canva</p>
+                <i class="fas fa-laptop-code"></i>
+                <h3>Web Development</h3>
+                <p>HTML, CSS, React, Node.js, REST APIs</p>
             </div>
             <div class="skill-item">
                 <i class="fas fa-database"></i>
                 <h3>Databases</h3>
-                <p>MySQL, PostgreSQL, MongoDB</p>
+                <p>MySQL, MongoDB, PostgreSQL</p>
             </div>
             <div class="skill-item">
                 <i class="fas fa-tools"></i>
                 <h3>Tools</h3>
-                <p>GitHub, Figma, Canva, VS Code</p>
+                <p>Git, Docker, AWS, VS Code</p>
             </div>
-            
-            <div class="skill-item">
-                <i class="fas fa-chart-line"></i> 
-                <h3>Data Analysis</h3>
-                <p>Python, R, Pandas, data visualization, statistical analysis</p>
-            </div>
-            
             <div class="skill-item">
                 <i class="fas fa-brain"></i>
                 <h3>Machine Learning</h3>
-                <p>Data preprocessing, model training, GenAI</p>
+                <p>Scikit-learn, TensorFlow, Data Analysis, Model Training</p>
             </div>
-            
+            <div class="skill-item">
+                <i class="fas fa-chart-line"></i>
+                <h3>Data Analysis</h3>
+                <p>Pandas, NumPy, Matplotlib, Seaborn</p>
+            </div>
         </div>
     </section>
 
@@ -696,8 +734,8 @@
                     <img src="project1.jpg" alt="Project 1">
                 </div>
                 <div class="project-info">
-                    <h3 class="project-title">Project Title 1</h3>
-                    <p class="project-description">A brief description of the project and its purpose.</p>
+                    <h3 class="project-title">E-commerce Website</h3>
+                    <p class="project-description">Developed a full-stack e-commerce website using React, Node.js, and MongoDB. Implemented user authentication, product catalog, shopping cart, and payment gateway integration.</p>
                     <div class="project-links">
                         <a href="#" target="_blank"><i class="fab fa-github"></i></a>
                         <a href="#" target="_blank"><i class="fas fa-link"></i></a>
@@ -710,8 +748,8 @@
                     <img src="project2.jpg" alt="Project 2">
                 </div>
                 <div class="project-info">
-                    <h3 class="project-title">Project Title 2</h3>
-                    <p class="project-description">A brief description of the project and its purpose.</p>
+                    <h3 class="project-title">Machine Learning Model for Image Classification</h3>
+                    <p class="project-description">Built a machine learning model for image classification using TensorFlow. Trained the model on a large dataset of images and achieved high accuracy. Deployed the model as a REST API for real-time predictions.</p>
                     <div class="project-links">
                         <a href="#" target="_blank"><i class="fab fa-github"></i></a>
                         <a href="#" target="_blank"><i class="fas fa-link"></i></a>
@@ -726,9 +764,9 @@
         <h2>Contact Me</h2>
         <p>Let's connect! Feel free to reach out for collaborations, opportunities, or just a friendly chat.</p>
         <div class="contact-links">
-            <a href="mailto:[Your Email]"><i class="fas fa-envelope"></i></a>
-            <a href="[Your LinkedIn Profile]" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="[Your GitHub Profile]" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="mailto:kshama.jain@example.com"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.linkedin.com/in/kshama-jain-example" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/kshama-jain-example" target="_blank"><i class="fab fa-github"></i></a>
         </div>
     </section>
 
@@ -747,7 +785,124 @@
             });
         });
 
-        // Typing animation for name (with backspace)
+        // Initialize particles.js
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: '#a899ff' // Adjust color
+                },
+                shape: {
+                    type: 'circle', // You can change to 'edge', 'triangle', 'polygon', 'star'
+                    stroke: {
+                        width: 0,
+                        color: '#000000'
+                    },
+                    polygon: {
+                        nb_sides: 5
+                    },
+                    image: {
+                        src: 'img/github.svg',
+                        width: 100,
+                        height: 100
+                    }
+                },
+                opacity: {
+                    value: 0.5,
+                    random: false,
+                    anim: {
+                        enable: false,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: {
+                        enable: false,
+                        speed: 40,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#a899ff',
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 6,
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    out_mode: 'out',
+                    attract: {
+                        enable: false,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'grab'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 140,
+                        line_linked: {
+                            opacity: 1
+                        }
+                    },
+                    bubble: {
+                        distance: 400,
+                        size: 40,
+                        duration: 2,
+                        opacity: 8,
+                        speed: 3
+                    },
+                    repulse: {
+                        distance: 200
+                    },
+                    push: {
+                        particles_nb: 4
+                    },
+                    remove: {
+                        particles_nb: 2
+                    }
+                }
+            },
+            retina_detect: true,
+            config_demo: {
+                hide_card: false,
+                background_color: '#b61924',
+                background_image: '',
+                background_position: '50% 50%',
+                background_repeat: 'no-repeat',
+                background_size: 'cover'
+            }
+            
+        });
         const animatedNameElement = document.getElementById('animated-name');
         const fullName = "Kshama Jain";
 
